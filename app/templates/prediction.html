@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Loan Prediction | Gayathri ML</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Gayathri ML
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">Home</a>
+
+            <a href="/prediction">Prediction</a>
+
+            <a href="/dashboard">Dashboard</a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Main Prediction Section -->
+
+    <div class="prediction-page">
+
+
+        <div class="prediction-card">
+
+
+            <h1>
+                Loan Approval Prediction
+            </h1>
+
+            <p class="prediction-description">
+                Enter applicant information to predict loan approval.
+            </p>
+
+
+
+            <form id="loanForm">
+
+
+                <div class="form-grid">
+
+
+                    <!-- Age -->
+
+                    <div class="form-group">
+
+                        <label for="age">
+                            Age
+                        </label>
+
+                        <input
+                            type="number"
+                            id="age"
+                            placeholder="Enter age"
+                            min="18"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Income -->
+
+                    <div class="form-group">
+
+                        <label for="income">
+                            Annual Income
+                        </label>
+
+                        <input
+                            type="number"
+                            id="income"
+                            placeholder="Enter annual income"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Credit Score -->
+
+                    <div class="form-group">
+
+                        <label for="credit_score">
+                            Credit Score
+                        </label>
+
+                        <input
+                            type="number"
+                            id="credit_score"
+                            placeholder="Enter credit score"
+                            min="300"
+                            max="850"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Loan Amount -->
+
+                    <div class="form-group">
+
+                        <label for="loan_amount">
+                            Loan Amount
+                        </label>
+
+                        <input
+                            type="number"
+                            id="loan_amount"
+                            placeholder="Enter loan amount"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Employment Years -->
+
+                    <div class="form-group">
+
+                        <label for="employment_years">
+                            Employment Years
+                        </label>
+
+                        <input
+                            type="number"
+                            id="employment_years"
+                            placeholder="Enter employment years"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+
+                    <!-- Existing Loans -->
+
+                    <div class="form-group">
+
+                        <label for="existing_loans">
+                            Existing Loans
+                        </label>
+
+                        <input
+                            type="number"
+                            id="existing_loans"
+                            placeholder="Enter existing loans"
+                            min="0"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- Button -->
+
+                <button
+                    type="submit"
+                    class="predict-button"
+                >
+                    Predict Loan
+                </button>
+
+
+            </form>
+
+
+
+            <!-- Result -->
+
+            <div
+                id="result"
+                class="result"
+            >
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        document
+            .getElementById("loanForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+
+                    event.preventDefault();
+
+
+                    const data = {
+
+                        age: Number(
+                            document
+                                .getElementById("age")
+                                .value
+                        ),
+
+                        income: Number(
+                            document
+                                .getElementById("income")
+                                .value
+                        ),
+
+                        credit_score: Number(
+                            document
+                                .getElementById("credit_score")
+                                .value
+                        ),
+
+                        loan_amount: Number(
+                            document
+                                .getElementById("loan_amount")
+                                .value
+                        ),
+
+                        employment_years: Number(
+                            document
+                                .getElementById("employment_years")
+                                .value
+                        ),
+
+                        existing_loans: Number(
+                            document
+                                .getElementById("existing_loans")
+                                .value
+                        )
+
+                    };
+
+
+                    const resultBox =
+                        document.getElementById("result");
+
+
+                    resultBox.className =
+                        "result result-loading";
+
+
+                    resultBox.innerHTML = `
+
+                        <h2>
+                            ⏳ Predicting...
+                        </h2>
+
+                        <p>
+                            Please wait while the ML model
+                            processes your application.
+                        </p>
+
+                    `;
+
+
+                    try {
+
+
+                        const response =
+                            await fetch(
+                                "/api/predict",
+                                {
+
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify(data)
+
+                                }
+                            );
+
+
+                        if (!response.ok) {
+
+                            throw new Error(
+                                "Prediction request failed"
+                            );
+
+                        }
+
+
+                        const result =
+                            await response.json();
+
+
+                        if (
+                            result.result ===
+                            "Loan Approved"
+                        ) {
+
+
+                            resultBox.className =
+                                "result result-approved";
+
+
+                            resultBox.innerHTML = `
+
+                                <div class="result-icon">
+                                    ✅
+                                </div>
+
+                                <h2>
+                                    Loan Approved
+                                </h2>
+
+                                <p>
+                                    The ML model predicts
+                                    that this loan application
+                                    is likely to be approved.
+                                </p>
+
+                                <div class="probability">
+
+                                    <span>
+                                        Approval Probability
+                                    </span>
+
+                                    <strong>
+                                        ${result.approval_probability}%
+                                    </strong>
+
+                                </div>
+
+                            `;
+
+
+                        } else {
+
+
+                            resultBox.className =
+                                "result result-rejected";
+
+
+                            resultBox.innerHTML = `
+
+                                <div class="result-icon">
+                                    ❌
+                                </div>
+
+                                <h2>
+                                    Loan Rejected
+                                </h2>
+
+                                <p>
+                                    The ML model predicts
+                                    that this loan application
+                                    is unlikely to be approved.
+                                </p>
+
+                                <div class="probability">
+
+                                    <span>
+                                        Approval Probability
+                                    </span>
+
+                                    <strong>
+                                        ${result.approval_probability}%
+                                    </strong>
+
+                                </div>
+
+                            `;
+
+                        }
+
+
+                    } catch (error) {
+
+
+                        resultBox.className =
+                            "result result-error";
+
+
+                        resultBox.innerHTML = `
+
+                            <div class="result-icon">
+                                ⚠️
+                            </div>
+
+                            <h2>
+                                Prediction Error
+                            </h2>
+
+                            <p>
+                                Unable to get the prediction.
+                                Please try again.
+                            </p>
+
+                        `;
+
+
+                        console.error(error);
+
+                    }
+
+                }
+            );
+
+
+    </script>
+
+
+</body>
+
+</html>

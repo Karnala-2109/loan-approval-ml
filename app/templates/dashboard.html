@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Gayathri ML</title>
+
+    <link rel="stylesheet"
+          href="/static/style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- Navigation -->
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Gayathri ML
+        </div>
+
+        <div class="nav-links">
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/prediction">
+                Prediction
+            </a>
+
+            <a href="/dashboard">
+                Dashboard
+            </a>
+
+        </div>
+
+    </nav>
+
+
+
+    <!-- Dashboard -->
+
+    <div class="container">
+
+        <h1>
+            Machine Learning Dashboard
+        </h1>
+
+        <p>
+            Overview of the Loan Approval Prediction Machine Learning model.
+        </p>
+
+
+
+        <!-- Model Summary -->
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    Algorithm
+                </h3>
+
+                <p>
+                    Logistic Regression
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Model Accuracy
+                </h3>
+
+                <p>
+                    <strong>100%</strong>
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Problem Type
+                </h3>
+
+                <p>
+                    Binary Classification
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Number of Features
+                </h3>
+
+                <p>
+                    6
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Dataset Information -->
+
+        <h2>
+            Dataset Information
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    Dataset Size
+                </h3>
+
+                <p>
+                    15 Records
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Target Variable
+                </h3>
+
+                <p>
+                    loan_approved
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Target Values
+                </h3>
+
+                <p>
+                    0 = Rejected<br>
+                    1 = Approved
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Model Type
+                </h3>
+
+                <p>
+                    Supervised Learning
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- Features -->
+
+        <h2>
+            Model Input Features
+        </h2>
+
+
+        <ul>
+
+            <li>
+                Age
+            </li>
+
+            <li>
+                Annual Income
+            </li>
+
+            <li>
+                Credit Score
+            </li>
+
+            <li>
+                Loan Amount
+            </li>
+
+            <li>
+                Employment Years
+            </li>
+
+            <li>
+                Existing Loans
+            </li>
+
+        </ul>
+
+
+
+        <!-- How It Works -->
+
+        <h2>
+            How the Prediction Works
+        </h2>
+
+
+        <div class="card">
+
+            <p>
+                1. The user enters loan applicant information.
+            </p>
+
+            <p>
+                2. The frontend sends the information to the FastAPI backend.
+            </p>
+
+            <p>
+                3. The trained Logistic Regression model processes the input.
+            </p>
+
+            <p>
+                4. The model predicts whether the loan is approved or rejected.
+            </p>
+
+            <p>
+                5. The application displays the prediction and approval probability.
+            </p>
+
+        </div>
+
+
+
+        <!-- Technology Stack -->
+
+        <h2>
+            Technology Stack
+        </h2>
+
+
+        <div class="cards">
+
+
+            <div class="card">
+
+                <h3>
+                    Python
+                </h3>
+
+                <p>
+                    Machine Learning development
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    Scikit-learn
+                </h3>
+
+                <p>
+                    Logistic Regression model
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    FastAPI
+                </h3>
+
+                <p>
+                    Backend REST API
+                </p>
+
+            </div>
+
+
+
+            <div class="card">
+
+                <h3>
+                    HTML / CSS / JavaScript
+                </h3>
+
+                <p>
+                    Frontend user interface
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</body>
+
+</html>
